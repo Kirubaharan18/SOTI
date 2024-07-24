@@ -14,7 +14,6 @@ public class CoinChange {
 
         dp[0] = 0;
 
-        // Iterate through each amount from 1 to amount
         for (int i = 1; i <= amount; i++) {
             for (int coin : coins) {
                 if (coin <= i) {
@@ -22,7 +21,7 @@ public class CoinChange {
                 }
             }
         }
-
+returnmdp{amount>amount -1 [amount]
         return dp[amount] > amount ? -1 : dp[amount];
     }
 }
