@@ -1,0 +1,78 @@
+public class GameOfLife {
+
+    public void gameOfLife(int[][] board) {
+        int m = board.length;
+        int n = board[0].length;
+        
+        int[][] nextBoard = new int[m][n];
+        
+        int[][] directions = {{-1, -1}, {-1, 0}, {-1, 1},
+                              {0, -1},         {0, 1},
+                              {1, -1}, {1, 0}, {1, 1}};
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                int liveNeighbors = 0;
+                
+                for (int[] dir : directions) {
+                    int ni = i + dir[0];
+                    int nj = j + dir[1];
+                    if (ni >= 0 && ni < m && nj >= 0 && nj < n && board[ni][nj] == 1) {
+                        liveNeighbors++;
+                    }
+                }
+                
+                if (board[i][j] == 1) {
+                    if (liveNeighbors < 2 || liveNeighbors > 3) {
+                        nextBoard[i][j] = 0;
+                    } else {
+                        // Rule 2: Any live cell with two or three live neighbors lives on
+                        nextBoard[i][j] = 1;
+                    }
+                } else {
+                    if (liveNeighbors == 3) {
+                        nextBoard[i][j] = 1;
+                    } else {
+                        nextBoard[i][j] = 0;
+                    }
+                }
+            }
+        }
+        
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                board[i][j] = nextBoard[i][j];
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        GameOfLife gol = new GameOfLife();
+        
+        int[][] board1 = {
+            {0,1,0},
+            {0,0,1},
+            {1,1,1},
+            {0,0,0}
+        };
+        gol.gameOfLife(board1);
+        printBoard(board1);
+        
+        int[][] board2 = {
+            {1,1},
+            {1,0}
+        };
+        gol.gameOfLife(board2);
+        printBoard(board2);
+    }
+    
+    private static void printBoard(int[][] board) {
+        for (int[] row : board) {
+            for (int cell : row) {
+                System.out.print(cell + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+}
