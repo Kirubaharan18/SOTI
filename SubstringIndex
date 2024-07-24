@@ -1,0 +1,21 @@
+public class SubstringIndex {
+
+    public static int findSubstringIndex(String S1, String S2) {
+        int index = S2.indexOf(S1);
+        
+        return index;
+    }
+
+    public static void main(String[] args) {
+        String S1 = "abc";
+        String S2 = "xyzabcdef";
+        
+        int index = findSubstringIndex(S1, S2);
+        
+        if (index != -1) {
+            System.out.println("Substring found at index: " + index);
+        } else {
+            System.out.println("Substring not found.");
+        }
+    }
+}
