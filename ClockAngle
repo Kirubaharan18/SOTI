@@ -1,0 +1,26 @@
+public class ClockAngle {
+
+    public static double findClockAngle(double h, double m) {
+        if (h < 0 || m < 0 || h > 12 || m > 59)
+            throw new IllegalArgumentException("Invalid input. Hours should be between 0-12 and minutes should be between 0-59.");
+
+        double minuteAngle = m * 6;
+        double hourAngle = (h * 30) + (m * 0.5);
+
+        double angle = Math.abs(hourAngle - minuteAngle);
+
+        angle = Math.min(angle, 360 - angle);
+
+        return angle;
+    }
+
+    public static void main(String[] args) {
+        double h1 = 12.00;
+        double m1 = 30.00;
+        System.out.println("Angle at " + h1 + ":" + m1 + " is " + findClockAngle(h1, m1) + " degrees");
+
+        double h2 = 3.00;
+        double m2 = 30.00;
+        System.out.println("Angle at " + h2 + ":" + m2 + " is " + findClockAngle(h2, m2) + " degrees");
+    }
+}
