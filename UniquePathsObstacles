@@ -1,0 +1,39 @@
+import java.util.*;
+
+public class UniquePathsObstacles {
+	static long MOD = 1000000007;
+
+	static long helper(int m, int n, int[][] obstacleGrid) {
+		if (m < 0 || n < 0) {
+			return 0;
+		}
+
+		if (obstacleGrid[m][n] == -1) {
+			return 0;
+		}
+
+		if (m == 0 && n == 0) {
+			return 1;
+		}
+
+		return (helper(m - 1, n, obstacleGrid) % MOD
+				+ helper(m, n - 1, obstacleGrid) % MOD)
+			% MOD;
+	}
+
+	static long uniquePathsWithObstacles(int[][] obstacleGrid) {
+		int m = obstacleGrid.length;
+		int n = obstacleGrid[0].length;
+
+		return helper(m - 1, n - 1, obstacleGrid);
+	}
+
+	public static void main(String[] args) {
+		int[][] grid = { { 0, 0, 0, 0 },
+						{ 0, -1, 0, 0 },
+						{ -1, 0, 0, 0 },
+						{ 0, 0, 0, 0 } };
+
+		System.out.println(uniquePathsWithObstacles(grid));
+	}
+}
